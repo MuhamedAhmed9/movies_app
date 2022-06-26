@@ -17,6 +17,7 @@ sidebarBtn.addEventListener("click", function (e) {
 /* start fetching movies */
 let currentPlaylistType = "";
 let currentSearchTerm = "";
+let currentGenre = "";
 async function fetchMovies(playlist_type = null, pageNum = null) {
   //fetching data
   let response;
@@ -36,8 +37,9 @@ async function fetchMovies(playlist_type = null, pageNum = null) {
     );
   }
   let data = await response.json();
-  currentPlaylistType = playlist_type != null ? playlist_type : "popular";
+  currentPlaylistType = playlist_type != null ? playlist_type : "now_playing";
   currentSearchTerm = "";
+  currentGenre = "";
   if (pageNum == null) {
     apiPagesCreator(data.total_pages);
   }
@@ -55,6 +57,7 @@ async function search(term, pageNum = null) {
     let data = await response.json();
     currentSearchTerm = term;
     currentPlaylistType = "";
+    currentGenre = "";
     if (pageNum == null) {
       apiPagesCreator(data.total_pages);
     }
@@ -67,7 +70,7 @@ searchInput.addEventListener("input", function (e) {
   search(e.target.value);
 });
 
-async function searchWithGenre(genre) {
+async function searchWithGenre(genre, pageNum = null) {
   if (genre != "") {
     let genreid = 0;
     let genres = await fetch(
@@ -80,9 +83,17 @@ async function searchWithGenre(genre) {
       }
     });
     let response = await fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=ef80a5c8a9404e2d98a00922fdd6774f&with_genres=${genreid}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=ef80a5c8a9404e2d98a00922fdd6774f&with_genres=${genreid}&page=${
+        pageNum || 1
+      }`
     );
     let data = await response.json();
+    currentGenre = genre;
+    currentPlaylistType = "";
+    currentSearchTerm = "";
+    if (pageNum == null) {
+      apiPagesCreator(data.total_pages);
+    }
     displayMovies(data.results);
   } else {
     fetchMovies();
@@ -310,7 +321,9 @@ function apiPagesCreator(pagesNum) {
       apiPagination.appendChild(pageLink);
     }
   }
-  apiPagination.querySelector("li").classList.add("active");
+  if (apiPagination.querySelector("li") != undefined) {
+    apiPagination.querySelector("li").classList.add("active");
+  }
   pageClicked();
 }
 
@@ -328,6 +341,13 @@ function pageClicked() {
       pageLink.addEventListener("click", (e) => {
         e.preventDefault();
         search(currentSearchTerm, e.target.innerHTML);
+        pagesLinks.forEach((link) => link.classList.remove("active"));
+        e.target.parentElement.classList.add("active");
+      });
+    } else if (currentGenre != "") {
+      pageLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        searchWithGenre(currentGenre, e.target.innerHTML);
         pagesLinks.forEach((link) => link.classList.remove("active"));
         e.target.parentElement.classList.add("active");
       });
