@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- start sidebar section -->
+    <nav class="sidebar">
+      <div class="nav-items">
+        <ul class="close">
+          <li data-value="now_playing">Now playing</li>
+          <li data-value="popular">Popular</li>
+          <li data-value="top_rated">Top Rated</li>
+          <li data-value="trending">Trending</li>
+          <li data-value="upcoming">Upcoming</li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+        <div class="social-item">
+          <div class="social-links">
+            <ul>
+              <li><i class="fab fa-twitter"></i></li>
+              <li><i class="fab fa-facebook"></i></li>
+              <li><i class="fab fa-instagram"></i></li>
+            </ul>
+          </div>
+          <div class="copyright lead">
+            Copyright © 2022 All Rights Reserved.
+          </div>
+        </div>
+      </div>
+      <div class="toggler-container bg-white">
+        <img src="imgs/logo.png" alt="logo" />
+        <span
+          ><i id="sidebarBtn" class="fa fa-align-justify text-black"></i
+        ></span>
+        <span><i class="fa fa-globe text-black"></i></span>
+      </div>
+    </nav>
+    <!-- end sidebar section -->
+    <!-- start searching field -->
+    <div class="container">
+      <div class="row p-5">
+        <form action="">
+          <div class="form-group">
+            <label for="search">Search : </label>
+            <div class="row">
+              <div class="col-md-6">
+                <input
+                  id="search"
+                  type="text"
+                  class="form-control"
+                  placeholder="Type Movie Name"
+                />
+              </div>
+              <div class="col-md-6">
+                <input
+                  id="searchGenre"
+                  type="text"
+                  class="form-control"
+                  placeholder="Type Movie Genre"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- end searching field -->
+    <!-- start movies section -->
+    <section class="movies-container">
+      <div class="container">
+        <div class="row gy-4 content"></div>
+      </div>
+    </section>
+    <!-- end movies section -->
+    <!-- start pagination section -->
+    <nav class="mt-5 w-75 mx-auto" aria-label="...">
+      <ul class="pagination d-flex justify-content-center">
+        <li class="page-item">
+          <span data-val="prev" class="page-link">Previous</span>
+        </li>
+        <ul id="api-pages" class="overflow-auto d-flex">
+          <!-- <li class="page-item"><span class="page-link">1</span></li> -->
+          <!-- <li class="page-item active"><span class="page-link">2</span></li> -->
+        </ul>
+        <li class="page-item">
+          <span data-val="next" class="page-link">Next</span>
+        </li>
+      </ul>
+    </nav>
+    <!-- end pagination section -->
+    <!-- start contact us section -->
+    <section id="contact" class="container my-5 contactUs">
+      <form class="row gy-3">
+        <h2>Contact Us</h2>
+        <div class="col-md-6">
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            id="name"
+            placeholder="Type Your Name"
+          />
+          <div class="error-msg">Name must be greater that 3 chars</div>
+        </div>
+        <div class="col-md-6">
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            id="email"
+            placeholder="Type your Email"
+          />
+          <div class="error-msg">email must be like : name@email.com</div>
+        </div>
+        <div class="col-md-6">
+          <input
+            type="text"
+            class="form-control"
+            name="phone"
+            id="phone"
+            placeholder="Type your Phone Number"
+          />
+          <div class="error-msg">phone number must be like : 01154144222</div>
+        </div>
+        <div class="col-md-6">
+          <input
+            type="text"
+            name="age"
+            id="age"
+            placeholder="Type your Age"
+            class="form-control"
+          />
+          <div class="error-msg">age must be greated than 10 years</div>
+        </div>
+        <div class="col-md-6">
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            id="password"
+            placeholder="Type your password"
+          />
+          <div class="error-msg">
+            password must be greater than or equal 8 characters
+          </div>
+        </div>
+        <div class="col-md-6">
+          <input
+            type="password"
+            class="form-control"
+            name="confirmPassword"
+            id="confirmPassword"
+            placeholder="Confirm your password"
+          />
+          <div class="error-msg">
+            password confirmation must match the password
+          </div>
+        </div>
+        <div class="col-md-12">
+          <button id="submitBtn" class="btn-danger py-1 px-4">Submit</button>
+        </div>
+      </form>
+    </section>
+    <!-- end contact us section -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
